@@ -205,6 +205,9 @@ h3 {
 /* ====== MOBILE OPTIMIZATIONS (<= 600px) ====== */
 /* ======================================= */
 @media (max-width: 600px) {
+    .ravan{
+        bottom: 15vh;
+    }
 
     /* Shrink the main game heading */
     h3 {
