@@ -35,7 +35,7 @@ h3 {
 /* --- Ravan Target Styling --- */
 .ravan {
     position: absolute;
-    bottom: 5vh;
+    bottom: 15vh;
     left: 50%;
     transform: translateX(-50%);
     cursor: none;
