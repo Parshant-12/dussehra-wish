@@ -1,0 +1,189 @@
+/* Existing body and container styles remain the same */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #333;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.game-container {
+    position: relative;
+    width: 100vw; /* Make it wider for impact */
+    height: 100vh; /* Make it taller for impact */
+    border: none; /* Remove border for a cleaner look */
+    background: linear-gradient(to bottom, #4a0000, #222); /* Dramatic background */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Ravan closer to the bottom */
+    align-items: center;
+    cursor: none; /* Hides default cursor */
+}
+
+h3 {
+    color: gold;
+    text-shadow: 0 0 10px gold, 0 0 20px red; /* Enhanced title glow */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    z-index: 100;
+}
+
+/* --- Ravan Target Styling --- */
+.ravan {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: none; /* FIXED: Hides cursor over Ravan */
+    transition: all 0.5s ease-out;
+    z-index: 5;
+}
+.ravanimg {
+    width: 400px;
+    filter: drop-shadow(0 0 10px black);
+    transition: filter 0.5s, transform 0.1s ease-out;
+}
+/* Ravan on hover for visual feedback */
+.ravan:hover .ravanimg {
+    filter: drop-shadow(0 0 10px red) brightness(1.1);
+}
+
+/* --- Ravan Burning Effect --- */
+@keyframes final-impact-shake {
+    /* FIX: The shake must include the Ravan's base position (translateX(-50%)) 
+       in its keyframes to prevent displacement. 
+    */
+    0%, 100% { 
+        transform: translateX(-50%); 
+    }
+    25% { 
+        transform: translateX(-52%) translateY(-2%); /* Shake slightly left and up */
+    }
+    75% { 
+        transform: translateX(-48%) translateY(2%); /* Shake slightly right and down */
+    }
+}
+
+.ravan.impact {
+    /* Existing animation remains */
+    animation: final-impact-shake 0.2s ease-in-out 3;
+}
+.burned {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1); 
+    transition: all 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* --- Arrow Styling and Animation --- */
+.arrow {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    font-size: 50px;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.1s;
+    text-shadow: 0 0 15px yellow, 0 0 30px orange; /* Brighter arrow */
+}
+
+/* The class added when the user "fires" */
+.shooting {
+    opacity: 1;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Crosshair Styling (Existing) --- */
+.crosshair {
+    position: absolute;
+    font-size: 30px;
+    color: yellow;
+    pointer-events: none;
+    z-index: 15;
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+    text-align: center;
+    text-shadow: 0 0 5px white, 0 0 10px red;
+    user-select: none;
+}
+
+/* --- Celebration Video/Message Overlay --- */
+.hidden-video {
+    display: none;
+}
+#cracker-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 30; 
+}
+
+/* New keyframes for fade-up animation */
+@keyframes wishFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.celebration-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* Controlled by JS/black fade */
+    z-index: 40;
+    text-align: center;
+    opacity: 0; /* Start hidden for animation */
+    /* Applied by JS when celebration starts */
+    -webkit-user-select: none;  /* Chrome, Safari, Opera */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE/Edge */
+    user-select: none;  
+}
+.celebration-message.animated {
+    animation: wishFadeUp 1.5s ease-out 0.2s forwards;
+}
+
+.celebration-message h2 {
+    font-size: 5em;
+    color: gold !important;
+    text-shadow: 0 0 10px red, 0 0 20px orange;
+    animation: pulse 1s infinite alternate;
+}
+.celebration-message p {
+    font-size: 2em;
+    color: white !important;
+    text-shadow: 2px 2px 3px black;
+}
+.hidden {
+    display: none;
+}
+
+/* --- Blackout Transition --- */
+.fading-to-black {
+    /* Applied to the body to force a complete blackout */
+    background-color: black !important;
+    transition: background-color 0.5s ease-in;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
