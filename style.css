@@ -1,5 +1,6 @@
 /* Existing body and container styles remain the same */
 body {
+    overflow: hidden !important;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -35,7 +36,7 @@ h3 {
 /* --- Ravan Target Styling --- */
 .ravan {
     position: absolute;
-    bottom: 5vh;
+    bottom: 15vh;
     left: 50%;
     transform: translateX(-50%);
     cursor: none;
@@ -68,13 +69,13 @@ h3 {
 }
 
 .ravan.impact {
-    animation: final-impact-shake 0.2s ease-in-out 3;
+    animation: final-impact-shake 0.3s ease-in-out 7;
 }
-.burned {
+/* .burned {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.1); 
     transition: all 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
+} */
 
 /* --- Arrow Styling and Animation --- */
 .arrow {
@@ -206,12 +207,13 @@ h3 {
 /* ======================================= */
 @media (max-width: 600px) {
     .ravan{
-        bottom: 15vh;
+        bottom: 20vh;
     }
 
     /* Shrink the main game heading */
     h3 {
         font-size: 1.5em; /* Smaller game title */
+        margin-bottom: 100px
     }
 
     /* Shrink the Ravan effigy */
@@ -243,4 +245,25 @@ h3 {
     .crosshair {
         font-size: 20px;
     }
+}
+
+/* --- Ravan Fire Video Styling --- */
+.hidden-fire-video {
+    display: none;
+}
+
+#fire-video {
+    position: absolute;
+    /* Match Ravan's base position */
+    bottom: 12vh; /* Adjust this value to position the flames correctly over Ravan's base */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 1500px; /* Adjust size to fit Ravan (slightly smaller than 400px Ravan) */
+    height: auto;
+    object-fit: contain;
+    
+    z-index: 7; /* Higher than Ravan (z-index: 5) and its fire-glow (z-index: 6) */
+    pointer-events: none;
+    mix-blend-mode: screen; /* Optional: Makes the black background of the video transparent/blend */
 }
